@@ -23,8 +23,7 @@ print('DAY 3 | PART 1:', int(gamma, 2) * int(epsilon, 2))
 
 
 # PART 2
-init_zeroes = list(filter(lambda x: x[0] == '0', binums))
-init_ones = binums[len(init_zeroes):]
+init_zeroes, init_ones = get_occurences(0, binums)
 
 oxygen = init_zeroes if len(init_ones) < len(init_zeroes) else init_ones
 co2 = init_ones if len(init_zeroes) > len(init_ones) else init_zeroes
