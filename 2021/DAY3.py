@@ -4,11 +4,16 @@ file = open('03.txt', 'r')
 lines = file.readlines()
 binums = sorted([l.strip() for l in lines])
 
-
 def get_occurences(i, lst):
     zeroes = list(filter(lambda x: x[i] == '0', lst))
     ones = lst[len(zeroes):]
     return (zeroes, ones)
+
+def most_frequent(lst1, lst2):
+    return lst1 if len(lst2) < len(lst1) else lst2
+
+def least_frequent(lst1, lst2):
+    return lst2 if len(lst1) > len(lst2) else lst1
 
 
 # PART 1
@@ -23,17 +28,16 @@ print('DAY 3 | PART 1:', int(gamma, 2) * int(epsilon, 2))
 
 
 # PART 2
-init_zeroes, init_ones = get_occurences(0, binums)
-
-oxygen = init_zeroes if len(init_ones) < len(init_zeroes) else init_ones
-co2 = init_ones if len(init_zeroes) > len(init_ones) else init_zeroes
+zeroes, ones = get_occurences(0, binums)
+oxygen = most_frequent(zeroes, ones)
+co2 = least_frequent(zeroes, ones)
 
 for i in range(1, len(counter)):
     if len(oxygen) > 1:
-        zeroes, ones = get_occurences(i, oxygen)
-        oxygen = zeroes if len(ones) < len(zeroes) else ones
+        _zeroes, _ones = get_occurences(i, oxygen)
+        oxygen = most_frequent(_zeroes, _ones)
 
     if len(co2) > 1:
-        zeroes, ones = get_occurences(i, co2)
-        co2 = ones if len(zeroes) > len(ones) else zeroes
+        _zeroes, _ones = get_occurences(i, co2)
+        co2 = least_frequent(_zeroes, _ones)
 print('DAY 3 | PART 2:', int(oxygen[0], 2) * int(co2[0], 2))
