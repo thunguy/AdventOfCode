@@ -1,11 +1,13 @@
+
+
 file = open('03.txt', 'r')
 lines = file.readlines()
-binums = [l.strip() for l in lines]
+binums = sorted([l.strip() for l in lines])
 
 
 def get_occurences(i, lst):
     zeroes = list(filter(lambda x: x[i] == '0', lst))
-    ones = list(filter(lambda x: x[i] == '1', lst))
+    ones = lst[len(zeroes):]
     return (zeroes, ones)
 
 
@@ -22,7 +24,7 @@ print('DAY 3 | PART 1:', int(gamma, 2) * int(epsilon, 2))
 
 # PART 2
 init_zeroes = list(filter(lambda x: x[0] == '0', binums))
-init_ones = list(filter(lambda x: x[0] == '1', binums))
+init_ones = binums[len(init_zeroes):]
 
 oxygen = init_zeroes if len(init_ones) < len(init_zeroes) else init_ones
 co2 = init_ones if len(init_zeroes) > len(init_ones) else init_zeroes
