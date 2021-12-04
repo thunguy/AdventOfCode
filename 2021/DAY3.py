@@ -1,5 +1,3 @@
-
-
 file = open('03.txt', 'r')
 lines = file.readlines()
 binums = sorted([l.strip() for l in lines])
