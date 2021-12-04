@@ -33,23 +33,19 @@ boards = [Board(board=matrix) for matrix in matrices]
 def play_bingo_part_1():
     for draw in draws:
         for board in boards:
-            score = board.check_num(num=draw)
-
+            score = board.check_num(draw)
             if score:
                 return score
 
 # PART 2
 def play_bingo_part_2():
     bingos, num_boards = set(), len(boards)
-
     for draw in draws:
         for i, board in enumerate(boards):
             if i not in bingos:
-                score = board.check_num(num=draw)
-
+                score = board.check_num(draw)
                 if score:
                     bingos.add(i)
-
                 if len(bingos) == num_boards:
                     return score
 
