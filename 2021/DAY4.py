@@ -1,11 +1,8 @@
-import numpy as np
-
 class Board():
     def __init__(self, board):
-        board = np.array(board)
         self.board = board
         self.rows = [set(row) for row in board]
-        self.columns = [set(col) for col in board.transpose()]
+        self.columns = [set([board[j][i] for j in range(len(board[i]))]) for i in range(len(board))]
 
     def check_num(self, num):
         for row in self.rows:
