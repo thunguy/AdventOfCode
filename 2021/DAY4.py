@@ -2,7 +2,7 @@ class Board():
     def __init__(self, board):
         self.board = board
         self.rows = [set(row) for row in board]
-        self.columns = [set([board[j][i] for j in range(len(board[i]))]) for i in range(len(board))]
+        self.columns = [set(row) for row in zip(*board)]
 
     def check_num(self, num):
         for row in self.rows:
@@ -33,9 +33,10 @@ boards = [Board(board=matrix) for matrix in matrices]
 def play_bingo_part_1():
     for draw in draws:
         for board in boards:
-            bingo = board.check_num(num=draw)
-            if bingo:
-                return bingo
+            score = board.check_num(num=draw)
+
+            if score:
+                return score
 
 # PART 2
 def play_bingo_part_2():
@@ -44,12 +45,13 @@ def play_bingo_part_2():
     for draw in draws:
         for i, board in enumerate(boards):
             if i not in bingos:
-                bingo = board.check_num(num=draw)
+                score = board.check_num(num=draw)
 
-                if bingo: bingos.add(i)
+                if score:
+                    bingos.add(i)
 
                 if len(bingos) == num_boards:
-                    return bingo
+                    return score
 
 print('DAY 4 | PART 1:', play_bingo_part_1())
 print('DAY 4 | PART 2:', play_bingo_part_2())
