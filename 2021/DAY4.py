@@ -1,6 +1,4 @@
-from re import L
 import numpy as np
-
 
 class Board():
     def __init__(self, board):
@@ -18,14 +16,12 @@ class Board():
         return self.check_row(num) or self.check_column(num)
 
     def check_row(self, num):
-        for row in self.rows:
-            if len(row) == 0:
-                return sum(list(map(sum, self.rows))) * num
+        if any(len(row) == 0 for row in self.rows):
+            return sum(list(map(sum, self.rows))) * num
 
     def check_column(self, num):
-        for col in self.columns:
-            if len(col) == 0:
-                return sum(list(map(sum, self.columns))) * num
+        if any(len(col) == 0 for col in self.columns):
+            return sum(list(map(sum, self.columns))) * num
 
 
 file = open('04.txt', 'r')
