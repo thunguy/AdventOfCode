@@ -7,9 +7,8 @@ class Board():
     def check_num(self, num):
         for row in self.rows:
             if num in row: row.remove(num)
-
-            for col in self.columns:
-                if num in col: col.remove(num)
+        for col in self.columns:
+            if num in col: col.remove(num)
         return self.check_row(num) or self.check_column(num)
 
     def check_row(self, num):
@@ -40,16 +39,16 @@ def play_bingo_part_1():
 
 # PART 2
 def play_bingo_part_2():
-    wins = set()
+    bingos, num_boards = set(), len(boards)
+
     for draw in draws:
-        for i in range(len(boards)):
-            if i not in wins:
-                bingo = boards[i].check_num(num=draw)
+        for i, board in enumerate(boards):
+            if i not in bingos:
+                bingo = board.check_num(num=draw)
 
-                if bingo:
-                    wins.add(i)
+                if bingo: bingos.add(i)
 
-                if len(wins) == len(boards):
+                if len(bingos) == num_boards:
                     return bingo
 
 print('DAY 4 | PART 1:', play_bingo_part_1())
