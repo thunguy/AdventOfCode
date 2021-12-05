@@ -16,6 +16,7 @@ def least_frequent(lst1, lst2):
 
 # PART 1
 counter = [0 for _ in range(len(binums[0]))]
+
 for i in range(len(binums)):
     for j in range(len(binums[i])):
         counter[j] += (2 * int(binums[i][j])) - 1
