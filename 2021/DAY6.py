@@ -1,14 +1,14 @@
 from collections import Counter
 
 file = open('06.txt', 'r')
-fish = [int(s) for s in file.readlines()[0].split(',')]
-init_counts = Counter(fish)
+init_states = [int(s) for s in file.readlines()[0].split(',')]
 
 def num_fish(days):
-    fish = [init_counts[i] for i in range(9)]
+    fish = Counter(init_states)
+
     for i in range(days):
         fish[(i+7) % 9] += fish[i % 9]
-    return sum(fish)
+    return sum(fish.values())
 
 print(f'DAY 6 | PART 1: {num_fish(80)}')
 print(f'DAY 6 | PART 2: {num_fish(256)}')
