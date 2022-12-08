@@ -2,11 +2,8 @@ def build_stacks(crates: list) -> list:
     crates = [[c.replace('[', '').replace(']', '')
                for c in c.replace('    ', ' ').split(' ')]
               for c in crates.splitlines()][:-1]
-    stacks = []
-    for stack in zip(*crates):
-        stack = [c for c in stack if c]
-        stack.reverse()
-        stacks += [stack]
+    stacks = [[c for c in stack if c][::-1]
+              for stack in zip(*crates)]
     return stacks
 
 def build_manual(orders: list) -> list:
